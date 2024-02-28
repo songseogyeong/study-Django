@@ -14,15 +14,17 @@
 <body>
 {#    로그인 여부에 따라 헤더가 다르면.. if문 사용#}
     {% if request.session.member %}
-        {% include 'fix/header.html' %}
-    {%  else %}
-        {% include 'fix/header.html' %}
-    {%  endif %}
+        {% include 'fix/header1.html' %}
+    {% elif 조건식 %}
+        {% include 'fix/header2.html' %}
+    {% else %}
+        {% include 'fix/header3.html' %}
+    {% endif %}
+    {% include 'fix/header.html' %}
     {% block content %}{% endblock %}
 </body>
     {% block js %}{% endblock %}
 </html>
-
 
 
 

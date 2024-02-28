@@ -20,9 +20,11 @@ class PostWriteView(View):
     @transaction.atomic
     def post(self, request):
         data = request.POST
+
         # input 태그 하나 당 파일 1개일 때
         # file = request.FILES
-        # input 채그 하나에 여러파일일 때(multiple), getlist('{input 태그 name 값}')
+
+        # input 태그 하나에 여러 파일일 때(multiple), getlist('{input 태그 name 값}')
         files = request.FILES.getlist('upload-file')
 
         # 직렬화된 상태라 dict 타입 풀어서 생성자에 전달
@@ -35,6 +37,11 @@ class PostWriteView(View):
         }
         post = Post.objects.create(**data)
 
+        # input 태그 당 파일 1개일 때
+        # for key in file:
+        #     PostFile.objects.create(post=post, path=file[key])
+
+        # input 태그 하나에 여러 파일일 때
         # input 태그의 name이 key로 들어감!
         for file in files:
             PostFile.objects.create(post=post, path=file)
