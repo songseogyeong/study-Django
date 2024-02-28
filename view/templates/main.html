@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>메인</title>
+</head>
+<body>
+    {% if request.session.member %}
+        <a href="/member/logout/">로그아웃</a>
+    {% else %}
+        <a href="{% url 'member:join' %}">회원가입</a>
+    {% endif %}
+    <h1>메인 페이지</h1>
+{#    <h1>{{ member.member_name }}님 환영합니다.</h1>#}
+    <h1 id="intro"></h1>
+    
+</body>
+<script>
+    const member_name = `{{ member.member_name }}`;
+    if(member_name){
+        document.getElementById("intro").innerText = `${member_name}님 환영합니다.`;    
+    }
+    
+</script>
+</html>
+
+
+
+

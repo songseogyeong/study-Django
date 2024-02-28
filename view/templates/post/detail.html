@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'post/css/header.css' %}">
+    <title>POST-DETAIL</title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        tr, th {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div>
+        <div>
+            <p>
+                <strong>{{ request.session.member.member_name }}님 환영합니다🤩</strong>
+            </p>
+        </div>
+        <div>
+            <a href="{% url 'member:logout' %}">로그아웃</a>
+        </div>
+    </div>
+</header>
+    <a href="/post/update/?id={{ post.id }}">수정하기</a>
+{#    <a href="{% url 'post:update' post_id=post.id post_test=1 %}">수정하기</a>#}
+    <a href="/post/delete/?id={{ post.id }}">삭제하기</a>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>조회수</th>
+        </tr>
+        <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.post_title }}</td>
+            <td>{{ post.post_content }}</td>
+            <td>{{ post.member.member_name }}</td>
+            <td>{{ post.post_view_count }}</td>
+        </tr>
+    </table>
+</body>
+</html>

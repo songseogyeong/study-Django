@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PRODUCT-DETAIL</title>
+</head>
+<body>
+    <ul id="product-info"></ul>
+</body>
+<script>
+    product_id = 1
+    const getProduct = async (callback) => {
+        const response = await fetch(`/products/${product_id}`);
+        const product = await response.json();
+        console.log(product);
+        if(callback){
+            callback(product);
+        }
+    }
+    getProduct(showProduct);
+    
+    product_id = 1
+    const getProduct = async (callback) => {
+        const response = await fetch(`/products/${product_id}`);
+        const product = await response.json();
+        if (callback) {
+            callback(product);
+        }
+    }
+    
+
+    const showProduct = (product) => {
+        const ul = document.getElementById("product-info");
+        ul.innerHTML = `
+            <li>
+                <ul>
+                    <li>${product.id}</li>
+                    <li>${product.product_name}</li>
+                    <li>${product.product_price}원</li>
+                    <li>${product.product_stock}개</li>
+                </ul>
+            </li>
+        `
+    }
+
+    const showProduct = (product) => {
+        const ul = document.getElementById("product")
+        ul.innerHTML = `
+            <li>
+                <ul>
+                    <li>${product.id}</li>
+                    <li>${product.product_name}</li>
+                    <li>${product.product_price}</li>
+                    <li>${product.product_stock}</li>
+                </ul>
+            </li>
+        `
+    }
+    
+    getProduct(showProduct);
+</script>
+</html>

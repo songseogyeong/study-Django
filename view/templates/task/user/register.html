@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USER-REGISTER</title>
+</head>
+<body>
+<form action="{% url 'user-register' %}" name="user-register-form">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="회원이름">
+    <input type="text" name="age" placeholder="나이">
+    <button>완료</button>
+</form>
+</body>
+</html>

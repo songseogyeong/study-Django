@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>REGISTER</title>
+</head>
+<body>
+<form action="{% url 'student-register' %}" name="student-register-form">
+    {% csrf_token %}
+    <input type="text" name="id" placeholder="학생 번호">
+    <input type="text" name="kor" placeholder="국어 점수">
+    <input type="text" name="eng" placeholder="영어 점수">
+    <input type="text" name="math" placeholder="수학 점수">
+    <button>완료</button>
+</form>
+</body>
+</html>

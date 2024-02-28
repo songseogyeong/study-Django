@@ -1,0 +1,34 @@
+{# setting에 있는 static 경로를 가져와주는 쿼리#}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'post/css/header.css' %}">
+    <title>POST-WRITE</title>
+</head>
+<body>
+<header>
+    <div>
+        <div>
+            <p>
+                <strong>{{ request.session.member.member_name }}님 환영합니다🤩</strong>
+            </p>
+        </div>
+        <div>
+            <a href="{% url 'member:logout' %}">로그아웃</a>
+        </div>
+    </div>
+</header>
+<form action="{% url 'post:write' %}" method="post" name="write-form">
+    {% csrf_token %}
+    <input type="text" name="post-title" placeholder="게시글 제목">
+    <p>게시글 내용</p>
+    <textarea name="post-content" cols="30" rows="10" style="resize: none"></textarea>
+    <button>완료</button>
+</form>
+</body>
+</html>

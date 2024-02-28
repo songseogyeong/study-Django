@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JOIN</title>
+</head>
+<body>
+<form action="/member/join/" method="post" name="join-form">
+    {% csrf_token %}
+    <input type="text" name="member-email" placeholder="아이디">
+    <input type="password" name="member-password" placeholder="비밀번호">
+    <input type="text" name="member-name" placeholder="이름">
+    <button type="button">완료</button>
+</form>
+</body>
+<script>
+    const button = document.querySelector("button[type=button]");
+    button.addEventListener("click", (e) => {
+        const memberEmail = document.querySelector("input[name=member-email]");
+        const memberPassword = document.querySelector("input[name=member-password]");
+        const memberName = document.querySelector("input[name=member-name]");
+
+        if(!memberEmail.value){
+            return;
+        }
+
+        if(!memberPassword.value){
+            return;
+        }
+
+        if(!memberName.value){
+            return;
+        }
+
+        document['join-form'].submit();
+    });
+</script>
+</html>
+
