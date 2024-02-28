@@ -1,3 +1,27 @@
+{% extends 'post/base.html' %}
+{% load static %}
+{% block static %}
+    <link rel="stylesheet" href="{% static 'post/css/table.css' %}">
+{% endblock %}
+
+{% block title %}LIST{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
+        </tr>
+    </table>
+    <button id="more">더보기</button>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'post/js/list.js' %}"></script>
+{% endblock %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,68 +30,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LIST</title>
-    <style>
-        table {
-            border: 1px solid black;
-            width: 600px;
-            margin: 0 auto;
-        }
-
-        tr, th {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-    </style>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>조회수</th>
-            <th>작성자</th>
-        </tr>
-    </table>
-    <button id="more">더보기</button>
 </body>
-<script>
-    const moreButton = document.getElementById("more");
-    let page = 1
-    const getList = (callback) => {
-        fetch(`http://127.0.0.1:8000/post/list/${page}`)
-        .then((response) => response.json())
-        .then((posts) => {
-            if(callback){
-                callback(posts)
-            }
-        })
-    }
-
-
-    const showList = (post_info) => {
-        if(!post_info.hasNext){
-            moreButton.style.display = 'none'
-        }
-        let posts = post_info.posts
-        const table = document.querySelector("table");
-        posts.forEach((post) => {
-            table.innerHTML += `
-                <tr>
-                    <td>${post.id}</td>
-                    <td><a href="/post/detail/?id=${post.id}">${post.post_title}</a></td>
-                    <td>${post.post_view_count}</td>
-                    <td>${post.member_name}</td>
-                </tr>
-            `
-        });
-    }
-
-    getList(showList);
-
-    moreButton.addEventListener("click", (e) => {
-        page ++;
-        getList(showList);
-    });
-</script>
 </html>

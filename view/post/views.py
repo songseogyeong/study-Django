@@ -8,8 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from member.models import Member
-from post.models import Post
-
+from post.models import Post, PostFile
 
 
 # 유저 정보는 화면에서 바로 받기 때문에 굳이 추가할 필요가 없다.
@@ -21,6 +20,10 @@ class PostWriteView(View):
     @transaction.atomic
     def post(self, request):
         data = request.POST
+        # input 태그 하나 당 파일 1개일 때
+        # file = request.FILES
+        # input 채그 하나에 여러파일일 때(multiple), getlist('{input 태그 name 값}')
+        files = request.FILES.getlist('upload-file')
 
         # 직렬화된 상태라 dict 타입 풀어서 생성자에 전달
         member = Member(**request.session['member'])
@@ -31,6 +34,10 @@ class PostWriteView(View):
             'member': member
         }
         post = Post.objects.create(**data)
+
+        # input 태그의 name이 key로 들어감!
+        for file in files:
+            PostFile.objects.create(post=post, path=file)
 
         return redirect(post.get_absolute_url())
 
@@ -44,7 +51,8 @@ class PostDetailView(View):
         post.save(update_fields=['post_view_count'])
 
         context = {
-            'post': post
+            'post': post,
+            'post_files': list(post.postfile_set.all())
         }
 
         return render(request, 'post/detail.html', context)

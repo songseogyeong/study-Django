@@ -21,3 +21,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f'/post/detail/?id={self.id}'
+
+class PostFile(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.PROTECT, null=False)
+    # 경로 =  %Y/%m/%d = 연도/월/일 = 현재시간을 기준으로 자동으로 들어감!
+    # 풀경로 문자열을 파일 이름으로 지정됨!
+    path = models.ImageField(null=False, blank=False, upload_to='post/%Y/%m/%d')
+
+    class Meta:
+        db_table = 'tbl_post_file'

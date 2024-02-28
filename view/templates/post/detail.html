@@ -23,18 +23,7 @@
     </style>
 </head>
 <body>
-<header>
-    <div>
-        <div>
-            <p>
-                <strong>{{ request.session.member.member_name }}님 환영합니다🤩</strong>
-            </p>
-        </div>
-        <div>
-            <a href="{% url 'member:logout' %}">로그아웃</a>
-        </div>
-    </div>
-</header>
+    {% include 'fix/header.html' %}
     <a href="/post/update/?id={{ post.id }}">수정하기</a>
 {#    <a href="{% url 'post:update' post_id=post.id post_test=1 %}">수정하기</a>#}
     <a href="/post/delete/?id={{ post.id }}">삭제하기</a>
@@ -54,5 +43,8 @@
             <td>{{ post.post_view_count }}</td>
         </tr>
     </table>
+    {% for post_file in post_files %}
+        <img src="/uplodad/{{ post_file.path }}">
+    {% endfor %}
 </body>
 </html>

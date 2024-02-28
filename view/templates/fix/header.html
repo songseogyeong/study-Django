@@ -1,0 +1,12 @@
+<header>
+    <div>
+        <div>
+            <p>
+                <strong>{{ request.session.member.member_name }}님 환영합니다🤩</strong>
+            </p>
+        </div>
+        <div>
+            <a href="{% url 'member:logout' %}">로그아웃</a>
+        </div>
+    </div>
+</header>

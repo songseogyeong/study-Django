@@ -1,0 +1,36 @@
+{% load static %}
+{# 모든 서비스에 base.html에 들어감 = 부모 html #}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'public/css/header.css' %}">
+    {% block static %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{#    로그인 여부에 따라 헤더가 다르면.. if문 사용#}
+    {% if request.session.member %}
+        {% include 'fix/header.html' %}
+    {%  else %}
+        {% include 'fix/header.html' %}
+    {%  endif %}
+    {% block content %}{% endblock %}
+</body>
+    {% block js %}{% endblock %}
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
